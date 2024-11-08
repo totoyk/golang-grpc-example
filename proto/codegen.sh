@@ -6,7 +6,6 @@ JS_DIR=./client/src
 DESCRIPTOR_DIR=./proxy/pb
 
 ####### Generate Go and JS code #######
-CMD=
 for proto in $(find $PROTO_DIR -name '*.proto' | sed 's!^.*/!!'); do
   PROTO_NAME=$(echo $proto | sed 's!\.proto!!')
   mkdir -p $GO_DIR/$PROTO_NAME
