@@ -5,7 +5,7 @@
 ### pb
 
 ```
-sh generate_code.sh
+docker compose run --rm protoc
 ```
 
 ### client

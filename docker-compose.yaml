@@ -1,0 +1,12 @@
+services:
+  protoc:
+    image: namely/protoc-all:latest
+    volumes:
+      - .:/defs
+    entrypoint: sh -c
+    command: >
+      '
+        echo "\e[31;42mGenerate the necessary code for gRPC requests...\e[m" && \
+        /bin/sh /defs/proto/codegen.sh && \
+        echo "\e[31;42mdone\e[m"
+      '
