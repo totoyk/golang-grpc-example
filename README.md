@@ -27,6 +27,5 @@ docker run -d -p 51051:51051 -p 9901:9901 golang-grpc-recap-envoy
 ### go
 
 ```
-cd api/
-go run ./server.go
+docker compose up -d api
 ```

@@ -10,3 +10,11 @@ services:
         /bin/sh /defs/proto/codegen.sh && \
         echo "\e[31;42mdone\e[m"
       '
+  api:
+    build:
+      context: ./api/
+      dockerfile: ./Dockerfile
+    ports:
+      - 50051:50051
+    volumes:
+      - ./api/:/app
