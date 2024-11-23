@@ -8,7 +8,7 @@ import (
 	"os"
 	"os/signal"
 
-	pb "golang-grpc-recap/helloworld/github.com/totoyk/golang-grpc-recap/proto/helloworld"
+	pb "golang-grpc-recap/pb/github.com/totoyk/golang-grpc-recap/proto/helloworld"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
