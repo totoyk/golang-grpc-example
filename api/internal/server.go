@@ -1,10 +1,12 @@
-package main
+package internal
 
 import (
 	"context"
 	"fmt"
 	"log"
 	"net"
+	"os"
+	"os/signal"
 
 	pb "golang-grpc-recap/helloworld/github.com/totoyk/golang-grpc-recap/proto/helloworld"
 
@@ -25,16 +27,27 @@ func (h HelloworldHandler) SayRepeatHello(ctx *pb.RepeatHelloRequest, srv pb.Gre
 	return status.Errorf(codes.Unimplemented, "method SayRepeatHello not implemented")
 }
 
-func main() {
-	port := "50051"
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", port))
+func Run() int {
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%s", "50051"))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
+		return 1
 	}
-	server := grpc.NewServer()
-	pb.RegisterGreeterServer(server, &HelloworldHandler{})
-	reflection.Register(server)
 
-	log.Printf("server listening at %v", lis.Addr())
-	server.Serve(lis)
+	grpcServer := grpc.NewServer()
+	pb.RegisterGreeterServer(grpcServer, &HelloworldHandler{})
+	reflection.Register(grpcServer)
+
+	go func() {
+		log.Printf("server listening at %v", lis.Addr())
+		if err := grpcServer.Serve(lis); err != nil {
+			log.Fatalf("failed to serve: %v", err)
+		}
+	}()
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	grpcServer.GracefulStop()
+	return 0
 }
