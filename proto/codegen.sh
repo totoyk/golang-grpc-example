@@ -1,7 +1,7 @@
 #!/bin/sh
 ####### Variables #######
 PROTO_DIR=./proto
-GO_DIR=./api/pb
+GO_DIR=./api/internal/pb
 JS_DIR=./client/src
 DESCRIPTOR_DIR=./proxy/pb
 
