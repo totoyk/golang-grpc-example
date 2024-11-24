@@ -1,8 +1,8 @@
 <script>
   export let name;
 
-  import { GreeterPromiseClient } from "./helloworld/proto/helloworld_grpc_web_pb";
-  import { HelloRequest } from "./helloworld/proto/helloworld_pb";
+  import { GreeterPromiseClient } from "./grpc_web/proto/helloworld_grpc_web_pb";
+  import { HelloRequest } from "./grpc_web/proto/helloworld_pb";
 
   const client = new GreeterPromiseClient("http://localhost:51051", null, null);
   const request = new HelloRequest();
