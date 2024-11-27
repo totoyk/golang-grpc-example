@@ -7,7 +7,7 @@ services:
     command: >
       '
         echo "\e[31;42mGenerate the necessary code for gRPC requests...\e[m" && \
-        /bin/sh /defs/proto/codegen.sh && \
+        /bin/sh /defs/proto/cmd/codegen.sh && \
         echo "\e[31;42mdone\e[m"
       '
   api:
