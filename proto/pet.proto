@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package pet;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "github.com/totoyk/golang-grpc-recap/proto/pet";
+
+service PetService {
+  rpc GetMyPet(google.protobuf.Empty) returns (GetPetReply);
+}
+
+message Pet {
+  string name = 1;
+  string species = 2;
+  string breed = 3;
+  string color = 4;
+  string age = 5;
+}
+
+message GetPetReply {
+  string name = 1;
+  string species = 2;
+  string breed = 3;
+  string color = 4;
+  string age = 5;
+}
