@@ -18,3 +18,12 @@ services:
       - 50051:50051
     volumes:
       - ./api/:/app
+    depends_on:
+      - proxy
+  proxy:
+    build:
+      context: ./proxy/
+      dockerfile: ./Dockerfile
+    ports:
+      - 51051:51051
+      - 9901:9901
