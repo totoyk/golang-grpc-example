@@ -21,3 +21,10 @@ npm run dev
 ```
 docker compose up -d api
 ```
+
+### go test
+
+```
+cd api/
+go test ./test/service/controller/*
+```
