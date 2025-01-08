@@ -4,6 +4,7 @@ import (
 	"context"
 	pb "golang-grpc-recap/internal/pb/github.com/totoyk/golang-grpc-recap/proto/pet"
 	"golang-grpc-recap/internal/service/usecase"
+	"golang-grpc-recap/internal/utils/zerrors"
 
 	"google.golang.org/protobuf/types/known/emptypb"
 )
@@ -15,7 +16,7 @@ type PetHandler struct {
 
 func (h PetHandler) GetMyPet(ctx context.Context, request *emptypb.Empty) (*pb.GetPetReply, error) {
 	output, err := h.UsecaseReceiver.GetMyPet(ctx)
-	if err != nil {
+	if err := zerrors.As(err); err != nil {
 		return nil, err
 	}
 	return &pb.GetPetReply{
