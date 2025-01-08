@@ -5,6 +5,7 @@ import (
 
 	pb "golang-grpc-recap/internal/pb/github.com/totoyk/golang-grpc-recap/proto/helloworld"
 	"golang-grpc-recap/internal/service/usecase"
+	"golang-grpc-recap/internal/utils/zerrors"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -17,7 +18,7 @@ type HelloworldHandler struct {
 
 func (h HelloworldHandler) SayHello(ctx context.Context, request *pb.HelloRequest) (*pb.HelloReply, error) {
 	output, err := h.UsecaseReceiver.SayHello(ctx, request.Name)
-	if err != nil {
+	if err := zerrors.As(err); err != nil {
 		return nil, err
 	}
 	return &pb.HelloReply{Message: output}, nil
