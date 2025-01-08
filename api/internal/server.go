@@ -25,6 +25,10 @@ func Run() int {
 
 	// TODO: enable log level from env
 	logger, err := logging.NewLogger("info")
+	if err != nil {
+		log.Fatalf("failed to create logger: %v", err)
+		return 1
+	}
 
 	grpcServer := grpc.NewServer(
 		grpc_middleware.WithUnaryServerChain(
