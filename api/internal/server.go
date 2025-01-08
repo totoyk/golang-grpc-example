@@ -3,7 +3,7 @@ package internal
 import (
 	"fmt"
 	"golang-grpc-recap/internal/service"
-	"golang-grpc-recap/internal/utils"
+	"golang-grpc-recap/internal/utils/logging"
 	"log"
 	"net"
 	"os"
@@ -24,7 +24,7 @@ func Run() int {
 	}
 
 	// TODO: enable log level from env
-	logger, err := utils.NewLogger("info")
+	logger, err := logging.NewLogger("info")
 
 	grpcServer := grpc.NewServer(
 		grpc_middleware.WithUnaryServerChain(
